@@ -1,0 +1,49 @@
+awsv-management/
+├── src/
+│   ├── lib/
+│   │   ├── components/
+│   │   │   ├── ui/                    # Shadcn-svelte Komponenten (Button, Input, Dialog, etc.)
+│   │   │   ├── dashboard/             # KPI-Karten, Status-Übersichten
+│   │   │   ├── facilities/            # Anlagen-Listen, Filter-Header, Audit-Historie
+│   │   │   └── defects/               # Mängelliste, Kommentar-System, Upload-Formulare
+│   │   ├── server/
+│   │   │   ├── db/
+│   │   │   │   ├── index.ts           # better-sqlite3 & Drizzle Instanziierung
+│   │   │   │   ├── schema.ts          # Datenbank-Schema (Anlagen, Mängel, Kommentare, Audits, Mailing)
+│   │   │   │   └── seed.ts            # Testdaten für Entwicklung
+│   │   │   ├── services/
+│   │   │   │   ├── awsv-calculator.ts # Logik für Gefährdungsstufen (A-D) & Prüfintervalle
+│   │   │   │   ├── mailer.ts          # E-Mail-Versand (Nodemailer/Resend)
+│   │   │   │   └── cron.ts            # Cronjob für wöchentliche Fristen-Warnungen (4/8 Wochen)
+│   │   │   └── storage/
+│   │   │       └── files.ts           # Upload-Handling für PDFs, Bilder & Nachweise auf den Server
+│   │   ├── utils/                     # Datumsformatierung, AwSV-Helfer, Generische Formatter
+│   │   └── types/                     # TypeScript Interfaces / Types
+│   ├── routes/
+│   │   ├── +layout.svelte             # Hauptlayout (Sidebar, Navigation)
+│   │   ├── +layout.server.ts          # Globale Server-Daten
+│   │   ├── +page.svelte               # Dashboard (KPIs & interaktive Anlagen-Liste)
+│   │   ├── +page.server.ts            # Lade-Logik für Dashboard-KPIs & Filter
+│   │   ├── facilities/
+│   │   │   ├── new/
+│   │   │   │   ├── +page.svelte       # Erstellungs-Formular
+│   │   │   │   └── +page.server.ts    # Formular-Action: Erstellung mit AwSV-Berechnung & Duplikat-Check
+│   │   │   └── [id]/
+│   │   │       ├── +page.svelte       # Detailansicht Split-Layout (Links: Anlage | Rechts: Mängel)
+│   │   │       └── +page.server.ts    # Actions: Update, Soft-Delete, Mangel erstellen/schließen
+│   │   ├── mailing/
+│   │   │   ├── +page.svelte       # Pflege der Mailingliste & Verantwortlichen
+│   │   │   └── +page.server.ts    # CRUD für Mailing-Verteiler
+│   │   └── api/
+│   │       ├── cron/
+│   │       │   └── +server.ts         # Serverless/Webhook Endpoint für den wöchentlichen Fristen-Cronjob
+│   │       └── files/
+│   │           └── [fileId]/
+│   │               └── +server.ts     # Auslieferung/Download der abgelegten Dokumente
+├── uploads/                           # Lokaler Speicherort für Dokumente & Fachbetriebsnachweise
+├── drizzle/                           # SQL-Migrationen (automatisch generiert von Drizzle Kit)
+├── static/                            # Statische Assets (Favicon, Logos)
+├── drizzle.config.ts                  # Drizzle ORM Konfiguration
+├── svelte.config.js                   # SvelteKit / Svelte 5 Konfiguration
+├── tailwind.config.ts                 # TailwindCSS & Shadcn Themen
+└── vite.config.ts                     # Vite & Plugin-Konfiguration
