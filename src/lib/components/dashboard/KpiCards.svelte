@@ -10,7 +10,7 @@
 <!-- 4 KPI-Karten Grid -->
 <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
 	<!-- Karte 1: Anlagen gesamt -->
-	<AnlagenKarte totalActive={204} stages={{ A: 158, B: 41, C: 3, D: 2 }} />
+	<AnlagenKarte stages={{ A: 158, B: 41, C: 3, D: 2 }} />
 
 	<!-- Karte 2: Prüfungen pro Monat -->
 	<Card.Root>

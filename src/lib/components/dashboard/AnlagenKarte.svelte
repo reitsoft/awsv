@@ -2,7 +2,6 @@
 	import * as Card from '$lib/components/ui/card';
 
 	interface Props {
-		totalActive?: number;
 		stages?: {
 			A: number;
 			B: number;
@@ -10,10 +9,8 @@
 			D: number;
 		};
 	}
-	let {
-		totalActive = 204,
-		stages = { A: 158, B: 41, C: 3, D: 2 }
-	}: Props = $props();
+
+	let { stages = { A: 158, B: 41, C: 3, D: 2 } }: Props = $props();
 
 	// AwSV Gefährdungsstufen Farb-Palette (gemäß Theme/Status)
 	const COLORS = {
@@ -63,7 +60,7 @@
 </script>
 
 <Card.Root
-	class="w-full overflow-hidden border-border/60 bg-gradient-to-b from-card to-card/60 shadow-sm"
+	class="w-full overflow-hidden border-border/60 bg-linear-to-b from-card to-card/60 shadow-sm"
 >
 	<Card.Header class="flex-row items-start justify-between space-y-0 pb-0">
 		<div>
@@ -87,7 +84,7 @@
 						class="text-muted/20"
 						stroke-width={STROKE}
 					/>
-					{#each slices as slice}
+					{#each slices as slice (slice.key)}
 						{#if slice.value > 0}
 							<circle
 								cx="50"
@@ -100,8 +97,9 @@
 								stroke-dashoffset={slice.dashOffset}
 								stroke-linecap="butt"
 								class="transition-[stroke-width,opacity] duration-200 ease-out"
-								style="opacity: {hovered === null || hovered === slice.key ? 1 : 0.35}; stroke-width: {hovered ===
-								slice.key
+								style="opacity: {hovered === null || hovered === slice.key
+									? 1
+									: 0.35}; stroke-width: {hovered === slice.key
 									? STROKE + 3
 									: STROKE}; transform-origin: 50px 50px;"
 								onmouseenter={() => (hovered = slice.key)}
@@ -112,7 +110,7 @@
 					{/each}
 				</svg>
 				<div class="pointer-events-none absolute inset-0 flex flex-col items-center justify-center">
-					<span class="text-2xl font-bold tabular-nums leading-none">
+					<span class="text-2xl leading-none font-bold tabular-nums">
 						{hovered ? stages[hovered] : totalSum}
 					</span>
 					<span class="mt-1 text-[11px] font-medium text-muted-foreground">
@@ -123,7 +121,7 @@
 
 			<!-- Legende -->
 			<div class="min-w-0 flex-1 space-y-3">
-				{#each slices as slice}
+				{#each slices as slice (slice.key)}
 					<button
 						type="button"
 						class="group flex w-full items-center gap-3 rounded-md py-0.5 text-left transition-opacity"
@@ -131,14 +129,12 @@
 						onmouseenter={() => (hovered = slice.key)}
 						onmouseleave={() => (hovered = null)}
 					>
-						<span
-							class="h-2 w-2 shrink-0 rounded-full"
-							style="background-color: {slice.color}"
+						<span class="h-2 w-2 shrink-0 rounded-full" style="background-color: {slice.color}"
 						></span>
 						<span class="flex-1 truncate text-sm font-medium text-muted-foreground">
 							{slice.label}
 						</span>
-						<span class="w-8 shrink-0 text-right text-sm font-bold tabular-nums text-foreground">
+						<span class="w-8 shrink-0 text-right text-sm font-bold text-foreground tabular-nums">
 							{slice.value}
 						</span>
 					</button>

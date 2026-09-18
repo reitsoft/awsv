@@ -13,7 +13,7 @@
 <div class="flex-1 space-y-6 p-6 pt-6 md:p-8">
 	<!-- Header / Aktionen -->
 	<div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-		<div>
+		<div class="space-y-1">
 			<h1 class="text-3xl font-bold tracking-tight">AwSV Dashboard</h1>
 			<p class="text-sm text-muted-foreground">
 				Überblick über Anlagen, Prüffristen und offene Mängel.
