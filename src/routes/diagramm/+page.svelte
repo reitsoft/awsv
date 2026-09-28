@@ -18,7 +18,12 @@
 
 	let idCounter = 0;
 	rootNode.each((node) => {
-		node.id = `${nodePath(node)}_${idCounter++}`;
+		Object.defineProperty(node, 'id', {
+			value: `${nodePath(node)}_${idCounter++}`,
+			writable: true,
+			configurable: true,
+			enumerable: true
+		});
 	});
 
 	rootNode
@@ -233,7 +238,7 @@
 						stroke="#ffffff"
 						stroke-width={isFocus ? '2' : '1'}
 						rx="6"
-						class="group-focus-visible:stroke-yellow-300 group-focus-visible:stroke-[3]"
+						class="group-focus-visible:stroke-yellow-300 group-focus-visible:stroke-3"
 					/>
 
 					{#if !isFocus && rect.width > 40 && rect.height > 25}
@@ -320,7 +325,9 @@
 						</div>
 						<div class="rounded-lg border border-slate-800/80 bg-slate-900/80 p-3">
 							<span class="text-[11px] font-medium text-slate-400">Standort</span>
-							<p class="mt-1 font-semibold text-slate-100">{formatValue(details.Standort ?? '-')}</p>
+							<p class="mt-1 font-semibold text-slate-100">
+								{formatValue(details.Standort ?? '-')}
+							</p>
 						</div>
 						<div class="rounded-lg border border-slate-800/80 bg-slate-900/80 p-3">
 							<span class="text-[11px] font-medium text-slate-400">Gefährdungstyp</span>
@@ -349,7 +356,7 @@
 										class="flex flex-col justify-between rounded-lg border border-slate-800/50 bg-slate-900/50 p-2.5 transition-colors hover:border-slate-700/60"
 									>
 										<dt class="text-[11px] font-medium text-slate-400">{key}</dt>
-										<dd class="mt-1 font-mono text-xs font-semibold break-words text-slate-200">
+										<dd class="mt-1 font-mono text-xs font-semibold wrap-break-words text-slate-200">
 											{formatValue(val)}
 										</dd>
 									</div>
