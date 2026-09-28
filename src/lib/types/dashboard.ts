@@ -16,3 +16,15 @@ export interface FacilitySummary {
 	status: 'In Betrieb' | 'Vorübergehend außer Betrieb' | 'Abgebaut/Archiviert';
 	openDefectsCount: number;
 }
+
+export type DefectSeverity = 'GM' | 'EM' | 'GEM';
+
+export interface Defect {
+	id: string;
+	title?: string | null;
+	severity?: DefectSeverity | null;
+	facilityName?: string | null;
+	facilityNumber?: string | null;
+	/** ISO-8601 Datumsstring oder bereits formatiert, je nach Backend */
+	reportedAt?: string | null;
+}

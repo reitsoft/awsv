@@ -1,5 +1,5 @@
 import type { PageServerLoad } from './$types';
-import type { DashboardKPIs, FacilitySummary } from '$lib/types/dashboard';
+import type { DashboardKPIs, FacilitySummary, Defect } from '$lib/types/dashboard';
 
 export const load: PageServerLoad = async () => {
 	// Dummy KPI-Daten
@@ -58,8 +58,28 @@ export const load: PageServerLoad = async () => {
 		}
 	];
 
+	const defects: Defect[] = [
+		{
+			id: 'a1b2c3d4-e5f6-47a8-9b3c-1234567890ab',
+			title: 'Undichtigkeit am Auffangbehälter',
+			severity: 'GEM',
+			facilityName: 'Lagertank Diesel BA30',
+			facilityNumber: 'BA30-T01',
+			reportedAt: '2026-09-12'
+		},
+		{
+			id: 'f7e6d5c4-b3a2-4190-8c7d-0987654321fe',
+			title: 'test',
+			severity: 'GM',
+			facilityName: null,
+			facilityNumber: 'EXK4-B02',
+			reportedAt: '2026-09-13'
+		}
+	];
+
 	return {
 		kpis,
-		recentFacilities
+		recentFacilities,
+		defects
 	};
 };

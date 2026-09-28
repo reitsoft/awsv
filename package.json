@@ -31,6 +31,8 @@
 		"@tailwindcss/typography": "^0.5.19",
 		"@tailwindcss/vite": "^4.3.0",
 		"@types/better-sqlite3": "^7.6.13",
+		"@types/d3-hierarchy": "^3.1.7",
+		"@types/d3-scale": "^4.0.9",
 		"@types/node": "^24",
 		"@vitest/browser-playwright": "^4.1.8",
 		"bits-ui": "^2.19.0",
@@ -68,6 +70,8 @@
 	},
 	"dependencies": {
 		"better-sqlite3": "^13.0.2",
+		"d3-hierarchy": "^3.1.2",
+		"d3-scale": "^4.0.2",
 		"lucide-svelte": "^1.0.1"
 	}
 }

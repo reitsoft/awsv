@@ -1,15 +1,27 @@
 <script lang="ts">
 	import './layout.css';
+	import { onNavigate } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { resolve } from '$app/paths';
 	import * as Sidebar from '$lib/components/ui/sidebar';
 	import { Separator } from '$lib/components/ui/separator';
-	import { LayoutDashboard, SearchCheck, Triangle, List } from '@lucide/svelte';
+	import { LayoutDashboard, SearchCheck, Triangle, List, Share2 } from '@lucide/svelte';
 
 	// Logo aus src/lib/assets importieren
 	import logoUrl from '$lib/assets/AMCR.svg';
 
 	let { children } = $props();
+
+	onNavigate((navigation) => {
+    if (!document.startViewTransition) return;
+
+    return new Promise((resolve) => {
+      document.startViewTransition(async () => {
+        resolve();
+        await navigation.complete;
+      });
+    });
+  });
 
 	// Navigationselemente für die AwSV App
 	const navItems = [
@@ -32,6 +44,11 @@
 			title: 'Prüfungen',
 			url: '/inspections',
 			icon: SearchCheck
+		},
+		{
+			title: 'Diagramm',
+			url: '/diagramm',
+			icon: Share2
 		}
 	];
 </script>
@@ -119,7 +136,7 @@
 		</header>
 
 		<!-- Seiteninhalt der aktuellen Route (z.B. Dashboard) -->
-		<main class="flex-1 overflow-y-auto">
+		<main class="flex-1 overflow-y-auto" style="view-transition-name: main-content">
 			{@render children()}
 		</main>
 	</Sidebar.Inset>

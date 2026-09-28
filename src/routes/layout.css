@@ -42,6 +42,20 @@
 	--sidebar-ring: oklch(0.708 0 0);
 }
 
+/* Root NICHT animieren – Nav bleibt fix */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* Nur das main-Element faden */
+::view-transition-old(main-content),
+::view-transition-new(main-content) {
+  animation-duration: 0.3s;
+  animation-timing-function: cubic-bezier(.66,.27,.34,.75);
+}
+
 .dark {
 	--background: oklch(0.245 0.040 245);
 	--foreground: oklch(0.965 0.002 245);
