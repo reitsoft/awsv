@@ -13,15 +13,15 @@
 	let { children } = $props();
 
 	onNavigate((navigation) => {
-    if (!document.startViewTransition) return;
+		if (!document.startViewTransition) return;
 
-    return new Promise((resolve) => {
-      document.startViewTransition(async () => {
-        resolve();
-        await navigation.complete;
-      });
-    });
-  });
+		return new Promise((resolve) => {
+			document.startViewTransition(async () => {
+				resolve();
+				await navigation.complete;
+			});
+		});
+	});
 
 	// Navigationselemente für die AwSV App
 	const navItems = [
@@ -53,7 +53,7 @@
 	];
 </script>
 
-<Sidebar.Provider>
+<Sidebar.Provider class="h-svh overflow-hidden">
 	<!-- Shadcn App Sidebar -->
 	<Sidebar.Root collapsible="icon">
 		<!-- Header mit App-Logo & Titel -->
@@ -117,7 +117,7 @@
 	</Sidebar.Root>
 
 	<!-- Haupt-Inhaltsbereich / Main Content Area -->
-	<Sidebar.Inset>
+	<Sidebar.Inset class="min-h-0">
 		<!-- Top Bar mit Sidebar Trigger & Breadcrumbs/Titel -->
 		<header
 			class="flex h-16 shrink-0 items-center justify-between gap-2 border-b px-4 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12"
@@ -137,7 +137,9 @@
 
 		<!-- Seiteninhalt der aktuellen Route (z.B. Dashboard) -->
 		<main class="flex-1 overflow-y-auto" style="view-transition-name: main-content">
-			{@render children()}
+			<div class="min-h-0 flex-1 overflow-y-auto" style="view-transition-name: main-content">
+				{@render children()}
+			</div>
 		</main>
 	</Sidebar.Inset>
 </Sidebar.Provider>

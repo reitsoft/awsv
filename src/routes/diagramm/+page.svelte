@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { hierarchy, treemap, type HierarchyRectangularNode } from 'd3-hierarchy';
 	import { scaleOrdinal } from 'd3-scale';
-	import data from './data.json';
+	import data from '$lib/data/data.json';
 
 	type NodeData = {
 		name: string;
